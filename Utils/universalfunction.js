@@ -1,6 +1,6 @@
 var loancustomermodel=require('../model/loan');
 module.exports={
-    
+    //
     saveindb:function(data,cb){
         loancustomermodel(data).save(function(err,res){
             if(err){

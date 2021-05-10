@@ -1,5 +1,6 @@
 var modelrepayment =require('../model/repayment')
 module.exports={
+    //
     saveindb:function(data,cb){
         modelrepayment(data).save(function(err,res){
             if(err){

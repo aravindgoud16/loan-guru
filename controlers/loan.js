@@ -25,6 +25,7 @@ module.exports={
     },
     //update the loan customer details
     updateloancustomer:function(data,cb){
+        
         universalfn.updateindb(data,function(err,res){
             if(err){
                 cb(err,null)

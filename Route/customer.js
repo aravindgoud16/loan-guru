@@ -1,5 +1,6 @@
 //imported customer vontroler file
 var import_customerControler=require('../controlers/customer');
+var validationfile=require('../Utils/validations');
 var Joi = require("joi");
 module.exports=function(app){
 // app.get('/newCustomer',function(req,res){
@@ -19,6 +20,10 @@ module.exports=function(app){
 
 //adding customers route and details
 app.post('/addcustomer',function(req,res){
+    //joi validation calling
+    const { error } = validationfile.addcustomerschema.validate(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+
     console.log(req);
     import_customerControler.addcusmoter(req.body,function(err,result){
         if(err){
@@ -31,7 +36,11 @@ app.post('/addcustomer',function(req,res){
 
 //total list customer details
 app.get('/listcustomer',function(req,res){
-    import_customerControler.listcustomer(function(err,result){
+    //joi validation calling
+    const { error } = validationfile. getcustomerSchema.validate({});
+    if(error) return res.status(400).send(error.details[0].message);
+
+    import_customerControler.listcustomer(req.query,function(err,result){
         // res.send(result);
         if(err){
             res.send(err);
@@ -43,14 +52,9 @@ app.get('/listcustomer',function(req,res){
 
 //api for update customer details
 app.put('/updatecustomer',function(req,res){
-
-    const objDataVaidator =Joi.object().keys({
-        _id:Joi.string(),
-        firstName:Joi.string().required().min(3),
-        age:Joi.string().required()
-    });
-    const { error } = objDataVaidator.validate(req.body);
-        if(error) return res.status(400).send(error.details[0].message);
+    //joi validation calling
+    const { error } = validationfile.updateDataVaidator.validate(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
 
     import_customerControler.updatecustomer(req.body,function(err,result){
         if(err){
@@ -63,6 +67,11 @@ app.put('/updatecustomer',function(req,res){
 
 //api for delete customer details
 app.delete('/deletecustomer',function(req,res){
+    //joi validation calling
+    const { error } = validationfile.deletecustomerSchema.validate(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+
+
     import_customerControler.deletecustomer(req.body,function(err,result){
         if(err){
             res.send(err);

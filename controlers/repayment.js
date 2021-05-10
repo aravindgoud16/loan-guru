@@ -24,6 +24,7 @@ module.exports={
     },
     //update the repayment customer details
     updaterepaymentcustomer:function(data,cb){
+       
         universalfn1.updateindb(data,function(err,res){
             if(err){
                 cb(err,null)

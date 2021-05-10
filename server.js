@@ -7,8 +7,8 @@ var body_parser= require("body-parser");
 var routecustomerfile=require("./Route/customer");
 var loanroutefile =require("./Route/loan");
 var repaymentfile=require("./Route/repayment");
-var addconfig =require('./Config/addconfig');
-var dbconfig =require("./Config/dbconfig");
+var addconfigfile =require('./Config/addconfig');
+var dbconfigfile =require("./Config/dbconfig");
 
 var app=express();
 
@@ -18,10 +18,10 @@ routecustomerfile(app);
 loanroutefile(app);
 repaymentfile(app);
 //running in loaclhost port number
-app.listen(addconfig.PORT)
+app.listen(addconfigfile.PORT)
 
 //connecting mongodb
-mongoose.connect("dbconfig.mongooseConnect",dbconfig.urlParser,function(err,res){
+mongoose.connect(dbconfigfile.mongooseConnect,dbconfigfile.urlParser,function(err,res){
     if(err){
         // res.send("mongodb connection is success");
         console.log("mongodb connection is failed",err);

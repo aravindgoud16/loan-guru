@@ -1,8 +1,7 @@
 
 //import the module /customer file
 var modelimport = require('../model/customer');
-var utilsimport= require('../Utils/universalfunction');
-// const customer = require('../Route/customer')
+// var validationfile=require('../Utils/validations');
 module.exports = {
     // newCustomer: function (data, cb) {
 
@@ -16,7 +15,8 @@ module.exports = {
 
     // adding the customer details
     addcusmoter: function (data, cb) {
-        modelimport(data).save(function (err, res) {
+       
+        modelimport(data).save(data,function (err, res) {
             if (err) {
                 cb(err, null);
             } else {
@@ -25,8 +25,11 @@ module.exports = {
         })
     },
     // list of customer details
-    listcustomer: function (cb) {
-        modelimport.find({}, function (err, res) {
+    listcustomer: function (data,cb) {
+     var obj={};
+
+    (data._id)?obj._id=data._id:null;
+        modelimport.find(obj, function (err, res) {
             if (err) {
                 cb(err, null)
             } else {
@@ -56,6 +59,7 @@ module.exports = {
         var queryobj = {
             _id: data._id
         };
+        
 
         modelimport.deleteOne(queryobj, function (err, res) {
             if (err) {
