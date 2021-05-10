@@ -1,6 +1,6 @@
 var loancustomermodel=require('../model/loan');
 module.exports={
-    //
+    //common logic for post
     saveindb:function(data,cb){
         loancustomermodel(data).save(function(err,res){
             if(err){
@@ -10,7 +10,7 @@ module.exports={
             }
         }) 
     },
-
+     //common logic for get
     saveindblist:function(data,cb){
         loancustomermodel.find({}, function (err, res) {
             if (err) {
@@ -20,6 +20,7 @@ module.exports={
             }
         })
     },
+     //common logic for update
     updateindb:function(data,cb){
         let obj={
             _id:data._id
@@ -37,6 +38,7 @@ module.exports={
         })
 
     },
+     //common logic for delete
     deleteindb:function(data,cb){
         let obj={
             _id:data._id
